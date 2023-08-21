@@ -24,7 +24,8 @@ public class GameObjectPatch {
                 @Advice.Argument(0) List<LevelSortedDrawable> list, @Advice.Argument(2) Level level,
                 @Advice.Argument(3) int tileX, @Advice.Argument(4) int tileY,
                 @Advice.Argument(6) GameCamera camera, @Advice.Argument(7) PlayerMob player) {
-            if (!LightOverlay.settings.drawOverlay)
+            if (!LightOverlay.settings.drawOverlay
+                    || level.lightManager.ambientLightOverride != null)
                 return;
             GameTile tile = level.getTile(tileX, tileY);
             if (tile.isLiquid || obj.isSolid)
