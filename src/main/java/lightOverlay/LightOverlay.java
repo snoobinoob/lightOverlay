@@ -1,5 +1,12 @@
 package lightOverlay;
 
+import lightOverlay.command.ModifyOverlayAlphaCommand;
+import necesse.engine.commands.CommandLog;
+import necesse.engine.commands.ModularChatCommand;
+import necesse.engine.control.InputEvent;
+import necesse.engine.network.client.Client;
+import necesse.engine.network.server.Server;
+import necesse.engine.network.server.ServerClient;
 import org.lwjgl.glfw.GLFW;
 import necesse.engine.commands.CommandsManager;
 import necesse.engine.commands.PermissionLevel;
@@ -23,7 +30,15 @@ public class LightOverlay {
         fakeHostileMob = new ZombieMob();
 
         toggleOverlayControl =
-                Control.addModControl(new Control(GLFW.GLFW_KEY_F8, "toggleoverlay"));
+                Control.addModControl(new Control(GLFW.GLFW_KEY_F8, "toggleoverlay") {
+                    @Override
+                    public void activate(InputEvent event) {
+                        super.activate(event);
+                        if (isPressed()) {
+                            settings.drawOverlay = !settings.drawOverlay;
+                        }
+                    }
+                });
     }
 
     public void initResources() {
@@ -38,11 +53,12 @@ public class LightOverlay {
     public void postInit() {
         try {
             CommandsManager.registerClientCommand(new BoolClientCommand("lightoverlay",
-                    "Toggle Light Overlay", PermissionLevel.USER,
+                    "Toggle light overlay", PermissionLevel.USER,
                     Settings.class.getField("drawOverlay"), settings));
         } catch (NoSuchFieldException | SecurityException e) {
             System.out.println("Could not register lightoverlay command: " + e.getMessage());
             e.printStackTrace();
         }
+        CommandsManager.registerClientCommand(new ModifyOverlayAlphaCommand());
     }
 }

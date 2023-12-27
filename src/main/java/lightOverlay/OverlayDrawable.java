@@ -6,14 +6,14 @@ import necesse.gfx.drawOptions.texture.TextureDrawOptions;
 import necesse.gfx.drawables.LevelSortedDrawable;
 
 public class OverlayDrawable extends LevelSortedDrawable {
-    private TextureDrawOptions options;
+    private final TextureDrawOptions options;
 
     public OverlayDrawable(int tileX, int tileY, GameCamera camera) {
         super(null, tileX, tileY);
         int drawX = camera.getTileDrawX(tileX);
         int drawY = camera.getTileDrawY(tileY);
 
-        options = LightOverlay.lowLightTexture.initDraw().pos(drawX, drawY);
+        options = LightOverlay.lowLightTexture.initDraw().alpha(LightOverlay.settings.alpha).pos(drawX, drawY);
     }
 
     @Override
