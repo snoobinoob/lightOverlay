@@ -12,7 +12,10 @@ import necesse.engine.commands.CommandsManager;
 import necesse.engine.commands.PermissionLevel;
 import necesse.engine.commands.clientCommands.BoolClientCommand;
 import necesse.engine.input.Control;
+import necesse.engine.localization.Localization;
 import necesse.engine.modLoader.annotations.ModEntry;
+import necesse.engine.GlobalData;
+import necesse.engine.state.MainGame;
 import necesse.entity.mobs.Mob;
 import necesse.entity.mobs.hostile.ZombieMob;
 import necesse.gfx.gameTexture.GameTexture;
@@ -36,6 +39,12 @@ public class LightOverlay {
                         super.activate(event);
                         if (isPressed()) {
                             settings.drawOverlay = !settings.drawOverlay;
+
+                            MainGame mainGame = (GlobalData.getCurrentState() instanceof MainGame) ? (MainGame)GlobalData.getCurrentState() : null;
+                            if (mainGame != null) {
+                              //mainGame.getClient().chat.addMessage("LightOverlay is " + (settings.drawOverlay ? "on.":"off."));
+                              mainGame.getClient().chat.addMessage(Localization.translate("controls", "togglemessage") + " " + Localization.translate("controls", (settings.drawOverlay ? "on":"off")));
+                            }
                         }
                     }
                 });

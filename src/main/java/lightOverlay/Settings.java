@@ -5,8 +5,8 @@ import necesse.engine.save.LoadData;
 import necesse.engine.save.SaveData;
 
 public class Settings extends ModSettings {
-    public boolean drawOverlay;
-    public float alpha;
+    public boolean drawOverlay = true;
+    public float alpha = 1f;
 
     @Override
     public void addSaveData(SaveData save) {
