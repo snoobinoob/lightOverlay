@@ -1,2 +1,5 @@
 [controls]
 toggleoverlay=Toggle Light Overlay
+togglemessage=Light Overlay is
+off=off
+on=on

@@ -1,6 +1,6 @@
 package lightOverlay;
 
-import necesse.engine.tickManager.TickManager;
+import necesse.engine.gameLoop.tickManager.TickManager;
 import necesse.gfx.camera.GameCamera;
 import necesse.gfx.drawOptions.texture.TextureDrawOptions;
 import necesse.gfx.drawables.LevelSortedDrawable;
@@ -18,7 +18,7 @@ public class OverlayDrawable extends LevelSortedDrawable {
 
     @Override
     public int getSortY() {
-        return 0;
+        return 1;
     }
 
     @Override

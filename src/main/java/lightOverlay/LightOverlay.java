@@ -3,7 +3,7 @@ package lightOverlay;
 import lightOverlay.command.ModifyOverlayAlphaCommand;
 import necesse.engine.commands.CommandLog;
 import necesse.engine.commands.ModularChatCommand;
-import necesse.engine.control.InputEvent;
+import necesse.engine.input.InputEvent;
 import necesse.engine.network.client.Client;
 import necesse.engine.network.server.Server;
 import necesse.engine.network.server.ServerClient;
@@ -11,8 +11,11 @@ import org.lwjgl.glfw.GLFW;
 import necesse.engine.commands.CommandsManager;
 import necesse.engine.commands.PermissionLevel;
 import necesse.engine.commands.clientCommands.BoolClientCommand;
-import necesse.engine.control.Control;
+import necesse.engine.input.Control;
+import necesse.engine.localization.Localization;
 import necesse.engine.modLoader.annotations.ModEntry;
+import necesse.engine.GlobalData;
+import necesse.engine.state.MainGame;
 import necesse.entity.mobs.Mob;
 import necesse.entity.mobs.hostile.ZombieMob;
 import necesse.gfx.gameTexture.GameTexture;
@@ -36,6 +39,12 @@ public class LightOverlay {
                         super.activate(event);
                         if (isPressed()) {
                             settings.drawOverlay = !settings.drawOverlay;
+
+                            MainGame mainGame = (GlobalData.getCurrentState() instanceof MainGame) ? (MainGame)GlobalData.getCurrentState() : null;
+                            if (mainGame != null) {
+                              //mainGame.getClient().chat.addMessage("LightOverlay is " + (settings.drawOverlay ? "on.":"off."));
+                              mainGame.getClient().chat.addMessage(Localization.translate("controls", "togglemessage") + " " + Localization.translate("controls", (settings.drawOverlay ? "on":"off")));
+                            }
                         }
                     }
                 });
