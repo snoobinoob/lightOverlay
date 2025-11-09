@@ -34,8 +34,8 @@ public class LevelDrawUtilsPatch {
                     modifier,
                     modifier.finalLimit(modifier.appendManager(modifier.defaultBuffManagerValue, LightOverlay.fakeHostileMob.spawnLightThreshold.value))
             );
-            for (int tileX = tileArea.startX; tileX <= tileArea.endX; tileX++) {
-                for (int tileY = tileArea.startY; tileY <= tileArea.endY; tileY++) {
+            for (int tileX = tileArea.startTileX; tileX <= tileArea.endTileX; tileX++) {
+                for (int tileY = tileArea.startTileY; tileY <= tileArea.endTileY; tileY++) {
                     boolean canSpawn = new MobSpawnLocation(LightOverlay.fakeHostileMob, tileX * 32 + 16, tileY * 32 + 16)
                             .checkMaxStaticLightThreshold(threshold)
                             .checkMobSpawnLocation()

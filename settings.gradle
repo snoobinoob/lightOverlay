@@ -9,7 +9,7 @@
 def modInfo = [
         modID          : "snoobinoob.lightoverlay",
         modName        : "Light Overlay",
-        modVersion     : "5.0",
+        modVersion     : "6.0",
         gameVersion    : "auto",
         modDescription : "Adds an overlay to show dark areas",
         author         : "Snoobinoob",
